@@ -79,39 +79,92 @@ var itemList = document.querySelector('#items');
 
 
  // create a div
- var newDiv = document.createElement('div');
+ //var newDiv = document.createElement('div');
  
  //Add class 
- newDiv.className = 'hello';
+// newDiv.className = 'hello';
 
  //add id
- newDiv.id = 'hello1';
+ //newDiv.id = 'hello1';
 
  //add atribute
- newDiv.setAttribute('title','hello div');
+ //newDiv.setAttribute('title','hello div');
 
  //create text node 
- var newDivText = document.createTextNode('HEllo word');
+ //var newDivText = document.createTextNode('HEllo word');
 
  //add text to div
- newDiv.appendChild(newDivText);
+ //newDiv.appendChild(newDivText);
 
- var container = document.querySelector('header .container');
- var h1 = document.querySelector('header h1');
+ //var container = document.querySelector('header .container');
+ //var h1 = document.querySelector('header h1');
 
- console.log(newDiv);
+ //console.log(newDiv);
 
- container.insertBefore(newDiv,h1);
+ //container.insertBefore(newDiv,h1);
 
 
- var newDiv = document.createElement('div');
- newDiv.className = 'list-group-item';
- newDiv.id = 'Hello1';
- newDiv.setAttribute('title','Hello div');
- newDivText = document.createTextNode('HEllo word');
- newDiv.appendChild(newDivText);
- var items = document.querySelector('ul');
- var li = document.querySelector('ul li');
+ //var newDiv = document.createElement('div');
+ //newDiv.className = 'list-group-item';
+ //newDiv.id = 'Hello1';
+ //newDiv.setAttribute('title','Hello div');
+ //newDivText = document.createTextNode('HEllo word');
+ //newDiv.appendChild(newDivText);
+ //var items = document.querySelector('ul');
+ //var li = document.querySelector('ul li');
 
- console.log(newDiv);
- items.insertBefore(newDiv,li);
+ //console.log(newDiv);
+ //items.insertBefore(newDiv,li);
+
+
+ var addform = document.getElementById('addForm');
+  var itemList = document.getElementById('items');
+
+  //form submit event
+  addform.addEventListener('submit',addItem);
+   //delete event 
+   itemList.addEventListener('click',removeItem);
+  //add item
+  function addItem(e){
+   e.preventDefault();
+  // console.log(1);  
+   //get input value
+   var newItem = document.getElementById('item').value;  
+    console.log(newItem);
+   //create new li element
+   var li = document.createElement('li');
+   // add class
+    li.className = 'list-group-item';   
+    //add text node with input value
+   li.appendChild(document.createTextNode(newItem));
+   //create delete button element  
+   var deletebtn = document.createElement('button');
+    
+   //add class the delete button 
+   deletebtn.className = 'btn btn-danger btn-sm float-right delete';
+
+   //append textnode 
+   deletebtn.appendChild(document.createTextNode('X'));
+   //appened button to li 
+   li.appendChild(deletebtn);
+   //append li to list
+   itemList.appendChild(li);
+
+   // making the input box empty after the newly entered value gets added to the items list
+  document.querySelector("#item").value = "";
+  // creating edit button
+  const btn = document.createElement("button");
+  btn.innerText = "Edit";
+  btn.className = "btn btn-primary btn-sm float-right mr-2";
+  // adding button to lists
+  li.appendChild(btn);
+  }
+  function removeItem(e){
+   if(e.target.classList.contains('delete')){
+    if(confirm('Are you Sure')){
+      var li  = e.target.parentElement;
+      itemList.removeChild(li);
+
+    }
+   }
+  }
